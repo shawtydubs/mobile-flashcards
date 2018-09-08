@@ -1,23 +1,28 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import {Constants} from 'expo';
+import {StyleSheet, View} from 'react-native';
+
+import DeckList from './components/DeckList';
 
 export default class App extends React.Component {
-  render() {
-    return (
-      <View style={styles.container}>
-        <Text>Open up App.js to start working on your app!</Text>
-        <Text>Changes you make will automatically reload.</Text>
-        <Text>Shake your phone to open the developer menu.</Text>
-      </View>
-    );
-  }
+    render() {
+        return (
+            <View style={styles.container}>
+                <View style={styles.statusBar} />
+                <DeckList />
+            </View>
+        );
+    }
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
+    container: {
+        flex: 1,
+        backgroundColor: '#fff',
+        alignItems: 'center',
+    },
+    statusBar: {
+        backgroundColor: '#fff',
+        height: Constants.statusBarHeight,
+    }
 });
