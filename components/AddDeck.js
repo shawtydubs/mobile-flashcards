@@ -30,7 +30,7 @@ class AddDeck extends Component {
 
         saveDeck(id, value);
         this.clearState();
-        // TODO: navigate to Home
+        this.props.navigation.goBack();
     };
 
     render() {
