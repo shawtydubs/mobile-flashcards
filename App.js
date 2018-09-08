@@ -4,6 +4,7 @@ import {StatusBar, StyleSheet, View} from 'react-native';
 
 import {darkBlue} from './utils/colors';
 import DeckList from './components/DeckList';
+import {initializeStorageIfNeeded} from './utils/api';
 
 const UdaciStatusBar = () => {
     return (
@@ -14,6 +15,10 @@ const UdaciStatusBar = () => {
 }
 
 export default class App extends Component {
+    componentDidMount() {
+        initializeStorageIfNeeded();
+    };
+
     render() {
         return (
             <View style={styles.container}>
