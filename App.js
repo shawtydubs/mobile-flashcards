@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {Component} from 'react';
 import {Constants} from 'expo';
 import {StatusBar, StyleSheet, View} from 'react-native';
 
@@ -12,7 +12,7 @@ const UdaciStatusBar = () => {
     )
 }
 
-export default class App extends React.Component {
+export default class App extends Component {
     render() {
         return (
             <View style={styles.container}>
