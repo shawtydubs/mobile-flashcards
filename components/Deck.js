@@ -5,10 +5,13 @@ import {black, gray} from '../utils/colors';
 
 class Deck extends Component {
     render() {
+        const {numQs, title} = this.props;
+        const unit = numQs === 1 ? 'card' : 'cards';
+
         return (
             <View style={styles.container}>
-                <Text style={styles.title}>deck title</Text>
-                <Text style={styles.cardCount}>3 cards</Text>
+                <Text style={styles.title}>{title}</Text>
+                <Text style={styles.cardCount}>{numQs} {unit}</Text>
             </View>
         )
     }

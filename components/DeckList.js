@@ -1,28 +1,47 @@
 import React, {Component} from 'react';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import {Platform, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import _ from 'lodash';
 
 import {blue, green, red, white} from '../utils/colors';
-import {clearDecks} from '../utils/api';
+import {clearDecks, getDecks} from '../utils/api';
 import Deck from './Deck';
 
 class DeckList extends Component {
+    state = {}
+
     addDeckNav = () => {
         this.props.navigation.navigate('AddDeck');
     }
 
+    componentDidMount() {
+        this._sub = this.props.navigation.addListener(
+            'didFocus',
+            () => getDecks().then(decks => this.setState({decks}))
+        )
+    }
+
     reset = () => {
         clearDecks();
+        getDecks().then(decks => this.setState({decks}))
     }
 
     render() {
+        const {decks} = this.state;
+
         return (
             <View style={styles.container}>
                 <View style={styles.deckContainer}>
                     <View style={styles.titleContainer}>
                         <Text style={styles.title}>DECKS</Text>
                     </View>
-                    <Deck />
+                    {decks && _.map(decks, deck => (
+                        <Deck
+                            key={deck.id}
+                            title={deck.title}
+                            numQs={deck.questions.length}
+                        />
+                    ))}
                 </View>
                 <View style={styles.btnContainer}>
                     <TouchableOpacity style={styles.deleteBtn} onPress={this.reset}>
