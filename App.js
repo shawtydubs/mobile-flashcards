@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {Constants} from 'expo';
 import {StatusBar, StyleSheet, View} from 'react-native';
 
+import {darkBlue} from './utils/colors';
 import DeckList from './components/DeckList';
 
 const UdaciStatusBar = () => {
@@ -28,10 +29,10 @@ const styles = StyleSheet.create({
         flex: 1
     },
     statusBar: {
-        backgroundColor: '#3c6f9b',
+        backgroundColor: darkBlue,
     },
     statusBarContainer: {
-        backgroundColor: '#3c6f9b',
+        backgroundColor: darkBlue,
         height: Constants.statusBarHeight,
     }
 });

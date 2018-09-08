@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import {
-    AsyncStorage,
     KeyboardAvoidingView,
     StyleSheet,
     Text,
@@ -8,6 +7,7 @@ import {
     TouchableOpacity,
 } from 'react-native';
 
+import {black} from '../utils/colors';
 import {createId} from '../utils/helpers';
 import {saveDeck} from '../utils/api';
 
@@ -57,7 +57,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     textInput: {
-        borderColor: '#000',
+        borderColor: black,
         borderWidth: StyleSheet.hairlineWidth,
         height: 40,
         paddingLeft: 10,

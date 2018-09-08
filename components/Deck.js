@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 
+import {black, gray} from '../utils/colors';
+
 class Deck extends Component {
     render() {
         return (
@@ -14,14 +16,14 @@ class Deck extends Component {
 
 const styles = StyleSheet.create({
     cardCount: {
-        color: '#545a63',
+        color: gray,
         fontSize: 20
     },
     container: {
         alignItems: 'center',
-        borderBottomColor: '#000',
+        borderBottomColor: black,
         borderBottomWidth: 2,
-        borderTopColor: '#000',
+        borderTopColor: black,
         borderTopWidth: 2,
         justifyContent: 'center',
         margin: 10,
