@@ -2,8 +2,12 @@ import {AsyncStorage} from 'react-native';
 
 const FLASHCARD_STORAGE_KEY = 'MobileFlashcards:Decks';
 
+export const clearDecks = () => {
+    return AsyncStorage.clear();
+}
+
 export const initializeStorageIfNeeded = () => {
-    AsyncStorage.getItem(FLASHCARD_STORAGE_KEY)
+    return AsyncStorage.getItem(FLASHCARD_STORAGE_KEY)
         .then(results => {
             if (!results) {
                 AsyncStorage.setItem(

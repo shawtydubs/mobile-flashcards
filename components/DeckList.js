@@ -1,12 +1,18 @@
 import React, {Component} from 'react';
-import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import Ionicons from '@expo/vector-icons/Ionicons';
+import {Platform, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 
-import {blue, red, white} from '../utils/colors';
+import {blue, green, red, white} from '../utils/colors';
+import {clearDecks} from '../utils/api';
 import Deck from './Deck';
 
 class DeckList extends Component {
     addDeckNav = () => {
         this.props.navigation.navigate('AddDeck');
+    }
+
+    reset = () => {
+        clearDecks();
     }
 
     render() {
@@ -18,9 +24,22 @@ class DeckList extends Component {
                     </View>
                     <Deck />
                 </View>
-                <TouchableOpacity style={styles.addBtn} onPress={this.addDeckNav}>
-                    <Text style={styles.btnText}>+</Text>
-                </TouchableOpacity>
+                <View style={styles.btnContainer}>
+                    <TouchableOpacity style={styles.deleteBtn} onPress={this.reset}>
+                        <Ionicons
+                            name={Platform.OS === 'ios' ? 'ios-trash' : 'md-trash'}
+                            size={50}
+                            color={white}
+                        />
+                    </TouchableOpacity>
+                    <TouchableOpacity style={styles.addBtn} onPress={this.addDeckNav}>
+                        <Ionicons
+                            name={Platform.OS === 'ios' ? 'ios-add' : 'md-add'}
+                            size={50}
+                            color={white}
+                        />
+                    </TouchableOpacity>
+                </View>
             </View>
         )
     }
@@ -29,17 +48,17 @@ class DeckList extends Component {
 const styles = StyleSheet.create({
     addBtn: {
         alignItems: 'center',
-        alignSelf: 'flex-end',
-        backgroundColor: red,
+        backgroundColor: green,
         borderRadius: 35,
         height: 70,
         justifyContent: 'center',
         margin: 30,
         width: 70,
     },
-    btnText: {
-        color: white,
-        fontSize: 30
+    btnContainer: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        width: '100%'
     },
     container: {
         alignItems: 'center',
@@ -49,6 +68,15 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         flex: 1,
         width: '100%'
+    },
+    deleteBtn: {
+        alignItems: 'center',
+        backgroundColor: red,
+        borderRadius: 35,
+        height: 70,
+        justifyContent: 'center',
+        margin: 30,
+        width: 70,
     },
     title: {
         color: white,
