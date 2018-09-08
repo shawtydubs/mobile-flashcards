@@ -7,7 +7,7 @@ import {
     TouchableOpacity,
 } from 'react-native';
 
-import {black} from '../utils/colors';
+import {black, blue, white} from '../utils/colors';
 import {createId} from '../utils/helpers';
 import {saveDeck} from '../utils/api';
 
@@ -42,8 +42,8 @@ class AddDeck extends Component {
                     onChangeText={this.handleTextChange}
                     value={this.state.value}
                 />
-                <TouchableOpacity onPress={this.submitTitle}>
-                    <Text>SUBMIT</Text>
+                <TouchableOpacity style={styles.submitBtn} onPress={this.submitTitle}>
+                    <Text style={styles.btnText}>SUBMIT</Text>
                 </TouchableOpacity>
             </KeyboardAvoidingView>
         )
@@ -51,10 +51,19 @@ class AddDeck extends Component {
 }
 
 const styles = StyleSheet.create({
+    btnText: {
+        color: white,
+        fontSize: 16
+    },
     container: {
         alignItems: 'center',
         flex: 1,
         justifyContent: 'center',
+    },
+    submitBtn: {
+        backgroundColor: blue,
+        borderRadius: 10,
+        padding: 20
     },
     textInput: {
         borderColor: black,

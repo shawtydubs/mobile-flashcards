@@ -13,7 +13,8 @@ const AddDeckNavigator = createStackNavigator(
         DeckList: {
             screen: DeckList,
             navigationOptions: {
-                header: null
+                header: null,
+                headerBackTitle: 'Back',
             }
         },
         AddDeck: {
