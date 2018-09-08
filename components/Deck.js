@@ -19,10 +19,14 @@ const styles = StyleSheet.create({
     },
     container: {
         alignItems: 'center',
-        borderColor: '#000',
-        borderWidth: 2,
+        borderBottomColor: '#000',
+        borderBottomWidth: 2,
+        borderTopColor: '#000',
+        borderTopWidth: 2,
         justifyContent: 'center',
+        margin: 10,
         padding: 40,
+        width: '100%',
     },
     title: {
         fontSize: 30
