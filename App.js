@@ -34,6 +34,7 @@ const AddDeckNavigator = createStackNavigator(
         DeckDetail: {
             screen: DeckDetail,
             navigationOptions: {
+                headerBackTitle: 'Deck',
                 headerTintColor: '#fff',
                 headerStyle: {
                     backgroundColor: blue
@@ -43,6 +44,7 @@ const AddDeckNavigator = createStackNavigator(
         DeckList: {
             screen: DeckList,
             navigationOptions: {
+                headerBackTitle: 'Deck List',
                 header: null,
             }
         },
