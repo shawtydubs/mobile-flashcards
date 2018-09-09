@@ -2,8 +2,8 @@ import React, {Component} from 'react';
 import {AppLoading} from 'expo';
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 
+import {black, green, red, white} from '../utils/colors';
 import {getDeck} from '../utils/api';
-import {green, red, white} from '../utils/colors';
 
 class Quiz extends Component {
     state = {
@@ -46,6 +46,15 @@ class Quiz extends Component {
         });
     }
 
+    restartQuiz = () => {
+        this.setState({
+            isFinalQuestion: false,
+            num: 1,
+            question: true,
+            score: 0
+        })
+    }
+
     toggleQuestion = () => {
         const {question} = this.state;
 
@@ -67,6 +76,16 @@ class Quiz extends Component {
                 <View style={styles.scoreContainer}>
                     <Text style={styles.quiz}>Score</Text>
                     <Text style={styles.score}>{percentage} %</Text>
+                    <View style={styles.btnContainer}>
+                        <TouchableOpacity
+                            style={[styles.btn, {backgroundColor: black}]}
+                            onPress={this.restartQuiz}
+                        >
+                            <Text style={styles.btnText}>
+                                Restart Quiz
+                            </Text>
+                        </TouchableOpacity>
+                    </View>
                 </View>
             )
         }
