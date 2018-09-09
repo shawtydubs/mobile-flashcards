@@ -4,6 +4,7 @@ import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 
 import {black, green, red, white} from '../utils/colors';
 import {getDeck} from '../utils/api';
+import {resetLocalNotifications} from '../utils/helpers';
 
 class Quiz extends Component {
     state = {
@@ -34,6 +35,10 @@ class Quiz extends Component {
         const newScore = correct ? score + 1 : score;
         const newNum = num === questions.length ? num : num + 1;
         const isFinalQuestion = newNum === num ? true : false;
+
+        if (isFinalQuestion) {
+            resetLocalNotifications();
+        }
 
         this.setState((state) => {
             return {

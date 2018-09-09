@@ -1,6 +1,6 @@
 import { Notifications, Permissions } from 'expo';
 
-import {checkNotifications, setNotificationsFlag} from './api';
+import {checkNotifications, clearNotificationsFlag, setNotificationsFlag} from './api';
 
 const createNotification = () => {
     return {
@@ -52,3 +52,7 @@ export const setLocalNotification = async() => {
         setNotificationsFlag();
     }
 };
+
+export const resetLocalNotifications = () => {
+    return clearNotificationsFlag().then(setLocalNotification());
+}

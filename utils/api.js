@@ -3,12 +3,9 @@ import {AsyncStorage} from 'react-native';
 const FLASHCARD_NOTIFICATION_KEY = 'MobileFlashcards:Notifications';
 const FLASHCARD_STORAGE_KEY = 'MobileFlashcards:Decks';
 
+// Decks
 export const clearDecks = () => {
     return AsyncStorage.clear();
-}
-
-export const checkNotifications = () => {
-    return AsyncStorage.getItem(FLASHCARD_NOTIFICATION_KEY);
 }
 
 export const getDeck = id => {
@@ -67,6 +64,16 @@ export const saveDeck = (id, value) => {
             .then(data => console.log("data: ", data))
     );
 };
+
+// Notifications
+
+export const checkNotifications = () => {
+    return AsyncStorage.getItem(FLASHCARD_NOTIFICATION_KEY);
+}
+
+export const clearNotificationsFlag = () => {
+    return AsyncStorage.removeItem(FLASHCARD_NOTIFICATION_KEY);
+}
 
 export const setNotificationsFlag = () => {
     return AsyncStorage.setItem(FLASHCARD_NOTIFICATION_KEY, JSON.stringify(true))
