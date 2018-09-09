@@ -6,6 +6,14 @@ export const clearDecks = () => {
     return AsyncStorage.clear();
 }
 
+export const getDeck = id => {
+    return AsyncStorage.getItem(FLASHCARD_STORAGE_KEY)
+        .then(results => {
+            const data = JSON.parse(results);
+            return data[id];
+        })
+}
+
 export const getDecks = () => {
     return AsyncStorage.getItem(FLASHCARD_STORAGE_KEY)
         .then(results => {

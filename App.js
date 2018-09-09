@@ -5,18 +5,12 @@ import {StatusBar, StyleSheet, View} from 'react-native';
 
 import AddDeck from './components/AddDeck';
 import {blue, darkBlue} from './utils/colors';
+import DeckDetail from './components/DeckDetail';
 import DeckList from './components/DeckList';
 import {initializeStorageIfNeeded} from './utils/api';
 
 const AddDeckNavigator = createStackNavigator(
     {
-        DeckList: {
-            screen: DeckList,
-            navigationOptions: {
-                header: null,
-                headerBackTitle: 'Back',
-            }
-        },
         AddDeck: {
             screen: AddDeck,
             navigationOptions: {
@@ -25,7 +19,23 @@ const AddDeckNavigator = createStackNavigator(
                     backgroundColor: blue
                 }
             }
-        }
+        },
+        DeckDetail: {
+            screen: DeckDetail,
+            navigationOptions: {
+                headerTintColor: '#fff',
+                headerStyle: {
+                    backgroundColor: blue
+                }
+            }
+        },
+        DeckList: {
+            screen: DeckList,
+            navigationOptions: {
+                header: null,
+                headerBackTitle: 'Back',
+            }
+        },
     },
     {
         initialRouteName: 'DeckList'

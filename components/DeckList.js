@@ -1,6 +1,13 @@
 import React, {Component} from 'react';
 import Ionicons from '@expo/vector-icons/Ionicons';
-import {Platform, ScrollView, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {
+    Platform,
+    ScrollView,
+    StyleSheet,
+    Text,
+    TouchableOpacity,
+    View
+} from 'react-native';
 import _ from 'lodash';
 
 import {blue, green, red, white} from '../utils/colors';
@@ -53,12 +60,20 @@ class DeckList extends Component {
                     </View>
                     <ScrollView style={styles.deckContainer}>
                         {decks && _.map(sortedDecks, deck => (
-                            <Deck
+                            <TouchableOpacity
                                 key={deck.id}
-                                isLastChild={isLastChild(deck.id)}
-                                numQs={deck.numQs}
-                                title={deck.title}
-                            />
+                                onPress={() => this.props.navigation.navigate(
+                                    'DeckDetail',
+                                    {id: deck.id}
+                                )}
+                            >
+                                <Deck
+                                    key={deck.id}
+                                    isLastChild={isLastChild(deck.id)}
+                                    numQs={deck.numQs}
+                                    title={deck.title}
+                                />
+                            </TouchableOpacity>
                         ))}
                     </ScrollView>
                 </View>
