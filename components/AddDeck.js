@@ -28,12 +28,14 @@ class AddDeck extends Component {
         const id = createId();
         const {value} = this.state;
 
-        saveDeck(id, value);
+        saveDeck(id, value.trim());
         this.clearState();
         this.props.navigation.goBack();
     };
 
     render() {
+        const disableBtn = this.state.value.trim() === '';
+
         return (
             <KeyboardAvoidingView style={styles.container} behavior="padding" enabled>
                 <Text style={styles.title}>What is the title of your new deck?</Text>
@@ -42,7 +44,11 @@ class AddDeck extends Component {
                     onChangeText={this.handleTextChange}
                     value={this.state.value}
                 />
-                <TouchableOpacity style={styles.submitBtn} onPress={this.submitTitle}>
+                <TouchableOpacity
+                    style={styles.submitBtn}
+                    onPress={this.submitTitle}
+                    disabled={disableBtn}
+                >
                     <Text style={styles.btnText}>SUBMIT</Text>
                 </TouchableOpacity>
             </KeyboardAvoidingView>

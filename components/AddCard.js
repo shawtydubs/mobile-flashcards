@@ -45,12 +45,15 @@ class AddCard extends Component {
         const {answer, question} = this.state;
         const {id} = this.props.navigation.state.params;
 
-        saveCard(id, answer, question);
+        saveCard(id, answer.trim(), question.trim());
         this.clearState();
         this.props.navigation.goBack();
     };
 
     render() {
+        const disableBtn = this.state.answer.trim() === ''
+            || this.state.question.trim() === '';
+
         return (
             <KeyboardAvoidingView style={styles.container} behavior="padding" enabled>
                 <Text style={styles.title}>Question</Text>
@@ -65,7 +68,11 @@ class AddCard extends Component {
                     onChangeText={this.handleAnswerChange}
                     value={this.state.answer}
                 />
-                <TouchableOpacity style={styles.submitBtn} onPress={this.submitCard}>
+                <TouchableOpacity
+                    style={styles.submitBtn}
+                    onPress={this.submitCard}
+                    disabled={disableBtn}
+                >
                     <Text style={styles.btnText}>SUBMIT</Text>
                 </TouchableOpacity>
             </KeyboardAvoidingView>
