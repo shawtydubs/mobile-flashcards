@@ -40,6 +40,7 @@ class Quiz extends Component {
                 ...state,
                 isFinalQuestion,
                 num: newNum,
+                question: true,
                 score: newScore
             }
         });
