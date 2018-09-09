@@ -9,6 +9,7 @@ import {blue, darkBlue} from './utils/colors';
 import DeckDetail from './components/DeckDetail';
 import DeckList from './components/DeckList';
 import {initializeStorageIfNeeded} from './utils/api';
+import Quiz from './components/Quiz';
 
 const AddDeckNavigator = createStackNavigator(
     {
@@ -43,6 +44,15 @@ const AddDeckNavigator = createStackNavigator(
             screen: DeckList,
             navigationOptions: {
                 header: null,
+            }
+        },
+        Quiz: {
+            screen: Quiz,
+            navigationOptions: {
+                headerTintColor: '#fff',
+                headerStyle: {
+                    backgroundColor: blue
+                }
             }
         },
     },

@@ -31,6 +31,13 @@ class DeckDetails extends Component {
         )
     }
 
+    quizNav = id => {
+        this.props.navigation.navigate(
+            'Quiz',
+            {id}
+        )
+    }
+
     render() {
         const {hasLoaded} = this.state;
 
@@ -42,6 +49,8 @@ class DeckDetails extends Component {
         const numQs = questions.length;
         const units = numQs === 1 ? 'card' : 'cards';
 
+        const disableBtn = numQs === 0;
+
         return (
             <View style={styles.container}>
                 <View style={styles.textContainer}>
@@ -52,7 +61,11 @@ class DeckDetails extends Component {
                     <TouchableOpacity style={styles.btn} onPress={() => this.addCardNav(id)}>
                         <Text style={styles.btnText}>Add Card</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={[styles.btn, {backgroundColor: black}]}>
+                    <TouchableOpacity
+                        style={[styles.btn, {backgroundColor: black}]}
+                        onPress={() => this.quizNav(id)}
+                        disabled={disableBtn}
+                    >
                         <Text style={[styles.btnText, {color: white}]}>Start Quiz</Text>
                     </TouchableOpacity>
                 </View>
