@@ -10,6 +10,7 @@ import DeckDetail from './components/DeckDetail';
 import DeckList from './components/DeckList';
 import {initializeStorageIfNeeded} from './utils/api';
 import Quiz from './components/Quiz';
+import {setLocalNotification} from './utils/helpers';
 
 const AddDeckNavigator = createStackNavigator(
     {
@@ -74,6 +75,7 @@ const UdaciStatusBar = () => {
 export default class App extends Component {
     componentDidMount() {
         initializeStorageIfNeeded();
+        setLocalNotification();
     };
 
     render() {
