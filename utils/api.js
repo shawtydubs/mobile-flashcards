@@ -33,6 +33,18 @@ export const initializeStorageIfNeeded = () => {
         });
 };
 
+export const saveCard = (id, answer, question) => {
+    return AsyncStorage.getItem(FLASHCARD_STORAGE_KEY)
+        .then(results => {
+            const data = JSON.parse(results);
+            data[id].questions.push({
+                question,
+                answer
+            });
+            AsyncStorage.setItem(FLASHCARD_STORAGE_KEY, JSON.stringify(data));
+        })
+}
+
 export const saveDeck = (id, value) => {
     return AsyncStorage.mergeItem(
         FLASHCARD_STORAGE_KEY,

@@ -28,6 +28,13 @@ class DeckList extends Component {
         )
     }
 
+    deckDetailNav = id => {
+        this.props.navigation.navigate(
+            'DeckDetail',
+            {id}
+        )
+    }
+
     reset = () => {
         clearDecks();
         getDecks().then(decks => this.setState({decks}))
@@ -62,10 +69,7 @@ class DeckList extends Component {
                         {decks && _.map(sortedDecks, deck => (
                             <TouchableOpacity
                                 key={deck.id}
-                                onPress={() => this.props.navigation.navigate(
-                                    'DeckDetail',
-                                    {id: deck.id}
-                                )}
+                                onPress={() => this.deckDetailNav(deck.id)}
                             >
                                 <Deck
                                     key={deck.id}

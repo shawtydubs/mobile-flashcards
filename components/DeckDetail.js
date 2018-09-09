@@ -13,12 +13,22 @@ class DeckDetails extends Component {
     componentDidMount() {
         const {id} = this.props.navigation.state.params;
 
-        getDeck(id).then(deck => {
-            this.setState({
-                deck,
-                hasLoaded: true
+        this._sub = this.props.navigation.addListener(
+            'didFocus',
+            () => getDeck(id).then(deck => {
+                this.setState({
+                    deck,
+                    hasLoaded: true
+                })
             })
-        })
+        )
+    }
+
+    addCardNav = id => {
+        this.props.navigation.navigate(
+            'AddCard',
+            {id}
+        )
     }
 
     render() {
@@ -28,7 +38,7 @@ class DeckDetails extends Component {
             return <AppLoading />
         }
 
-        const {deck: {questions, title}} = this.state;
+        const {deck: {id, questions, title}} = this.state;
         const numQs = questions.length;
         const units = numQs === 1 ? 'card' : 'cards';
 
@@ -39,7 +49,7 @@ class DeckDetails extends Component {
                     <Text style={styles.cardCount}>{numQs} {units}</Text>
                 </View>
                 <View style={styles.btnContainer}>
-                    <TouchableOpacity style={styles.btn}>
+                    <TouchableOpacity style={styles.btn} onPress={() => this.addCardNav(id)}>
                         <Text style={styles.btnText}>Add Card</Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={[styles.btn, {backgroundColor: black}]}>

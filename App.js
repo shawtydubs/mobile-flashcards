@@ -3,6 +3,7 @@ import {createStackNavigator} from 'react-navigation';
 import {Constants} from 'expo';
 import {StatusBar, StyleSheet, View} from 'react-native';
 
+import AddCard from './components/AddCard';
 import AddDeck from './components/AddDeck';
 import {blue, darkBlue} from './utils/colors';
 import DeckDetail from './components/DeckDetail';
@@ -11,6 +12,15 @@ import {initializeStorageIfNeeded} from './utils/api';
 
 const AddDeckNavigator = createStackNavigator(
     {
+        AddCard: {
+            screen: AddCard,
+            navigationOptions: {
+                headerTintColor: '#fff',
+                headerStyle: {
+                    backgroundColor: blue
+                }
+            }
+        },
         AddDeck: {
             screen: AddDeck,
             navigationOptions: {
@@ -33,7 +43,6 @@ const AddDeckNavigator = createStackNavigator(
             screen: DeckList,
             navigationOptions: {
                 header: null,
-                headerBackTitle: 'Back',
             }
         },
     },

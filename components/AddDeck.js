@@ -24,7 +24,7 @@ class AddDeck extends Component {
         this.setState({value});
     };
 
-    submitTitle = async() => {
+    submitTitle = () => {
         const id = createId();
         const {value} = this.state;
 
