@@ -31,6 +31,7 @@ export const saveDeck = (id, value) => {
         JSON.stringify(
             {
                 [id]: {
+                    createDate: new Date(),
                     id,
                     title: value,
                     questions: []

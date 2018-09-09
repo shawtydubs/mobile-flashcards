@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import Ionicons from '@expo/vector-icons/Ionicons';
-import {Platform, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {Platform, ScrollView, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import _ from 'lodash';
 
 import {blue, green, red, white} from '../utils/colors';
@@ -28,20 +28,39 @@ class DeckList extends Component {
 
     render() {
         const {decks} = this.state;
+        const sortedDecks = _(decks)
+            .map(deck => {
+                const {createDate, id, questions, title} = deck;
+
+                return {
+                    createDate,
+                    id,
+                    numQs: questions ? questions.length : 0,
+                    title
+                }
+            })
+            .sortBy('createDate')
+            .reverse()
+            .valueOf();
+
+        const isLastChild = id => _.get(_.last(sortedDecks), 'id') === id;
 
         return (
             <View style={styles.container}>
-                <View style={styles.deckContainer}>
+                <View style={styles.topContainer}>
                     <View style={styles.titleContainer}>
                         <Text style={styles.title}>DECKS</Text>
                     </View>
-                    {decks && _.map(decks, deck => (
-                        <Deck
-                            key={deck.id}
-                            title={deck.title}
-                            numQs={deck.questions.length}
-                        />
-                    ))}
+                    <ScrollView style={styles.deckContainer}>
+                        {decks && _.map(sortedDecks, deck => (
+                            <Deck
+                                key={deck.id}
+                                isLastChild={isLastChild(deck.id)}
+                                numQs={deck.numQs}
+                                title={deck.title}
+                            />
+                        ))}
+                    </ScrollView>
                 </View>
                 <View style={styles.btnContainer}>
                     <TouchableOpacity style={styles.deleteBtn} onPress={this.reset}>
@@ -75,6 +94,7 @@ const styles = StyleSheet.create({
         width: 70,
     },
     btnContainer: {
+        backgroundColor: 'transparent',
         flexDirection: 'row',
         justifyContent: 'space-between',
         width: '100%'
@@ -84,8 +104,7 @@ const styles = StyleSheet.create({
         flex: 1,
     },
     deckContainer: {
-        alignItems: 'center',
-        flex: 1,
+        // flex: 1,
         width: '100%'
     },
     deleteBtn: {
@@ -106,8 +125,12 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         backgroundColor: blue,
         justifyContent: 'center',
-        marginBottom: 50,
         width: '100%',
+    },
+    topContainer: {
+        alignItems: 'center',
+        flex: 1,
+        width: '100%'
     },
 })
 

@@ -5,11 +5,14 @@ import {black, gray} from '../utils/colors';
 
 class Deck extends Component {
     render() {
-        const {numQs, title} = this.props;
+        const {isLastChild, numQs, title} = this.props;
         const unit = numQs === 1 ? 'card' : 'cards';
 
         return (
-            <View style={styles.container}>
+            <View style={[
+                styles.container,
+                {borderBottomWidth: isLastChild ? 0 : 1}
+            ]}>
                 <Text style={styles.title}>{title}</Text>
                 <Text style={styles.cardCount}>{numQs} {unit}</Text>
             </View>
@@ -25,11 +28,9 @@ const styles = StyleSheet.create({
     container: {
         alignItems: 'center',
         borderBottomColor: black,
-        borderBottomWidth: 2,
+        borderBottomWidth: 1,
         borderTopColor: black,
-        borderTopWidth: 2,
         justifyContent: 'center',
-        margin: 10,
         padding: 40,
         width: '100%',
     },
