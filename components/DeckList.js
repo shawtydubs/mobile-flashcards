@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {AppLoading} from 'expo';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import {
     Platform,
@@ -15,7 +16,9 @@ import {clearDecks, getDecks} from '../utils/api';
 import Deck from './Deck';
 
 class DeckList extends Component {
-    state = {}
+    state = {
+        hasLoaded: false
+    }
 
     addDeckNav = () => {
         this.props.navigation.navigate('AddDeck');
@@ -24,7 +27,12 @@ class DeckList extends Component {
     componentDidMount() {
         this._sub = this.props.navigation.addListener(
             'didFocus',
-            () => getDecks().then(decks => this.setState({decks}))
+            () => getDecks().then(decks => {
+                this.setState({
+                    decks,
+                    hasLoaded: true
+                })
+            })
         )
     }
 
@@ -41,6 +49,12 @@ class DeckList extends Component {
     }
 
     render() {
+        const {hasLoaded} = this.state;
+
+        if (!hasLoaded) {
+            return <AppLoading />
+        }
+
         const {decks} = this.state;
         const sortedDecks = _(decks)
             .map(deck => {
