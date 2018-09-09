@@ -6,6 +6,7 @@ import {
     TextInput,
     TouchableOpacity,
 } from 'react-native';
+import {StackActions, NavigationActions} from 'react-navigation';
 
 import {black, blue, white} from '../utils/colors';
 import {createId} from '../utils/helpers';
@@ -24,13 +25,31 @@ class AddDeck extends Component {
         this.setState({value});
     };
 
+    navigateToDeck = id => {
+        const resetAction = StackActions.reset({
+            index: 1,
+            actions: [
+                NavigationActions.navigate({
+                    routeName: 'DeckList'
+                }),
+                NavigationActions.navigate({
+                    routeName: 'DeckDetail',
+                    params: {id}
+                })
+            ]
+        });
+
+        this.props.navigation.dispatch(resetAction);
+    }
+
     submitTitle = () => {
         const id = createId();
         const {value} = this.state;
 
         saveDeck(id, value.trim());
         this.clearState();
-        this.props.navigation.goBack();
+
+        this.navigateToDeck(id);
     };
 
     render() {
