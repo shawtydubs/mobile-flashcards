@@ -68,7 +68,7 @@ class AddDeck extends Component {
                     onPress={this.submitTitle}
                     disabled={disableBtn}
                 >
-                    <Text style={styles.btnText}>SUBMIT</Text>
+                    <Text style={styles.btnText}>Create Deck</Text>
                 </TouchableOpacity>
             </KeyboardAvoidingView>
         )
