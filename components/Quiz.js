@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {AppLoading} from 'expo';
+import {StackActions, NavigationActions} from 'react-navigation';
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 
 import {black, green, red, white} from '../utils/colors';
@@ -27,6 +28,23 @@ class Quiz extends Component {
                 })
             })
         )
+    }
+
+    navigateToDeck = id => {
+        const resetAction = StackActions.reset({
+            index: 1,
+            actions: [
+                NavigationActions.navigate({
+                    routeName: 'DeckList'
+                }),
+                NavigationActions.navigate({
+                    routeName: 'DeckDetail',
+                    params: {id}
+                })
+            ]
+        });
+
+        this.props.navigation.dispatch(resetAction);
     }
 
     nextQuestion = (correct) => {
@@ -74,7 +92,7 @@ class Quiz extends Component {
         }
 
         if (isFinalQuestion) {
-            const {deck: {questions}, score} = this.state;
+            const {deck: {id, questions}, score} = this.state;
             const percentage = Math.round(score / questions.length * 100);
 
             return (
@@ -88,6 +106,14 @@ class Quiz extends Component {
                         >
                             <Text style={styles.btnText}>
                                 Restart Quiz
+                            </Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity
+                            style={[styles.btn, {borderColor: black, borderWidth: 2}]}
+                            onPress={() => this.navigateToDeck(id)}
+                        >
+                            <Text style={[styles.btnText, {color: black}]}>
+                                Back to Deck
                             </Text>
                         </TouchableOpacity>
                     </View>
